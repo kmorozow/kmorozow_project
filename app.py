@@ -2,7 +2,10 @@ from flask import Flask, session, render_template
 from flask_sqlalchemy import SQLAlchemy
 
 from service import authorizationService
+from service import buyTicketService
 from service import changeTimetableService
+from service import changeTicketService
+
 from service import registrationService
 
 app = Flask(__name__)
@@ -12,9 +15,10 @@ app.config.update(DEBUG=True, SECRET_KEY='secretkey',
                   USERNAME='admin', PASSWORD='admin')
 db = SQLAlchemy(app)
 
-
+app.register_blueprint(changeTicketService.mod)
 app.register_blueprint(registrationService.mod)
-app.register_blueprint(authorizationService.mod
+app.register_blueprint(authorizationService.mod)
+app.register_blueprint(buyTicketService.mod)
 
 app.register_blueprint(changeTimetableService.mod)
 
