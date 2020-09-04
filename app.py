@@ -1,6 +1,9 @@
 from flask import Flask, session, render_template
 from flask_sqlalchemy import SQLAlchemy
 
+from service import registrationService
+from service import authorizationService
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///base.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -8,6 +11,9 @@ app.config.update(DEBUG=True, SECRET_KEY='secretkey',
                   USERNAME='admin', PASSWORD='admin')
 db = SQLAlchemy(app)
 
+
+app.register_blueprint(registrationService.mod)
+app.register_blueprint(authorizationService.mod
 
 @app.route('/')
 def main():
